@@ -55,7 +55,7 @@ https://github.com/startedourmission/ITC_2023_2_WirleesNetwork_4/issues/1#issue-
 ### AI 선풍기 - 차진우
 
 
-![[Pasted image 20231102164131.png]]
+![](etc/sample1.png)
 
 #### 1. 개발목적
 
