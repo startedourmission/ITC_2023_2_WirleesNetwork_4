@@ -84,7 +84,7 @@ https://twinw.tistory.com/136
 - 서버 -> 라즈베리파이 데이터 전송 : 웹 소켓 고려 중
 - 딥러닝 영상 처리 -> Pre-trained Object Detection 모델 (YOLO 등)
 
-
+***
 
 #### 무선 기상관측소 - 박세현
 
@@ -113,6 +113,7 @@ https://twinw.tistory.com/136
 #### 4. 참조
 https://howtomechatronics.com/tutorials/arduino/arduino-wireless-weather-station-project/
 https://robobob.tistory.com/67
+
 https://bota.tistory.com/1710
 
 ***
