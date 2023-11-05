@@ -169,3 +169,25 @@ https://biz.chosun.com/it-science/ict/2023/02/04/34R26QSKFBG7BIAMQZFTMP5AKA/
 https://arduinosensors.tistory.com/category/%EB%AA%A8%EB%91%90%EC%9D%98%20%EC%95%84%EB%91%90%EC%9D%B4%EB%85%B8%20%ED%99%98%EA%B2%BD%20%EC%84%BC%EC%84%9C/2%EC%9E%A5%20%EB%AF%B8%EC%84%B8%EB%A8%BC%EC%A7%80%20%EC%B8%A1%EC%A0%95%20%EC%84%BC%EC%84%9C
 
 ***
+
+### 최저가 물품 검색 시스템 - 최민주
+
+#### 1. 개발목적
+
+카메라로 상품을 찍으면 인터넷에서 최저가 상품을 찾아 텔레그램으로 전달해 준다. 
+
+#### 2. 필요 장비 및 센서
+
+1. 라즈리파이, 아두이노
+2. pi카메라
+
+#### 3. 사용 기술
+- 카메라로 찍은 물건 식별 : 아두이노 / python
+- 최저가 찾는 사이트에 물건 검색 : python
+- 최저가 사이트 링크 텔레그램으로 전달 : python
+  
+#### 4. 참조
+
+https://blog.naver.com/PostView.naver?blogId=fkdldjs60&logNo=222161730266&parentCategoryNo=&categoryNo=11&viewDate=&isShowPopularPosts=false&from=postView
+https://catloaf.tistory.com/19
+***
