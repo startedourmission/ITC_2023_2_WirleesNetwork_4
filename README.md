@@ -141,3 +141,30 @@ https://kocoafab.cc/tutorial/view/322
 https://pimylifeup.com/raspberry-pi-rfid-attendance-system/
 
 ***
+#### 공기질 측정 백팩 - 유성운
+
+
+#### 1. 개발 목적
+
+가방에 센서를 장착하여 사용자의 이동 환경에 맞춰 대기질을 실시간으로 측정하고 Telegram으로 사용자에게 대기 환경 정보를 전달하고 마스크 권고와 같은 대안을 추천하며 GPS로 시간 및 장소를 수집해 일간, 주간, 월간 통계를 전달한다.
+출퇴근시 지하철 안 지하철 역사, 장거리 이동 혹은 대기 정보가 제공되지 않는곳에서 체류시 유용
+
+#### 2. 필요 장비 및 센서
+
+- 습도, 온도, 공기질 센서
+- GPS
+- 아두이노, 라즈베리파이
+- 가방
+- 보조배터리
+
+#### 3. 사용 기술
+
+기반 : 라즈베리파이, 아두이노
+센서 : 대기 측정 센서
+언어 : Python
+
+#### 4. 참조
+https://biz.chosun.com/it-science/ict/2023/02/04/34R26QSKFBG7BIAMQZFTMP5AKA/
+https://arduinosensors.tistory.com/category/%EB%AA%A8%EB%91%90%EC%9D%98%20%EC%95%84%EB%91%90%EC%9D%B4%EB%85%B8%20%ED%99%98%EA%B2%BD%20%EC%84%BC%EC%84%9C/2%EC%9E%A5%20%EB%AF%B8%EC%84%B8%EB%A8%BC%EC%A7%80%20%EC%B8%A1%EC%A0%95%20%EC%84%BC%EC%84%9C
+
+***
