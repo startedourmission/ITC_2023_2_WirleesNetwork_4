@@ -83,3 +83,36 @@ https://twinw.tistory.com/136
 - 라즈베리파이 -> 서버 영상 전송 : 스트리밍 (g streamer, ffmpeg 등) 고려 중
 - 서버 -> 라즈베리파이 데이터 전송 : 웹 소켓 고려 중
 - 딥러닝 영상 처리 -> Pre-trained Object Detection 모델 (YOLO 등)
+
+
+
+#### 무선 기상관측소 - 박세현
+
+
+#### 1. 개발 목적
+
+![ec9ca0ec9aa9ed959c-eb9dbceca688ebb2a0eba6ac-ed8c8cec9db4-ec84bcec849c-ed9484eba19ceca09ded8ab8-6eab080eca780](https://github.com/startedourmission/ITC_2023_2_WirleesNetwork_4/assets/112607443/2fa28bb5-2634-4861-bf6d-d0ac3129aaf1)
+
+개인이나 가정 환경에서 사용자가 현재 날씨 정보를 실시간으로 확인하고, 이 정보를 활용하여 다양한 자동화 작업을 수행할 수 있도록 도움을 주는 것. 예를 들어, 기상 관측 데이터를 기반으로 스마트 창문 덮개를 자동으로 조절하거나, 난방 및 냉방을 최적화하여 에너지를 절약할 수 있습니다.
+
+
+
+#### 2. 필요 장비 및 센서
+
+- 습도, 온도, 압력 및 공기질 센서
+- 안테나
+- 방수 상자
+- LTR-559 (조도, 근접도)
+- 12비트 ADC
+- IPS LCD
+
+#### 3. 사용 기술
+
+- 아두이노 / python
+
+#### 4. 참조
+https://howtomechatronics.com/tutorials/arduino/arduino-wireless-weather-station-project/
+https://robobob.tistory.com/67
+https://bota.tistory.com/1710
+
+***
