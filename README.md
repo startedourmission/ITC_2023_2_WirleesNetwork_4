@@ -117,3 +117,27 @@ https://robobob.tistory.com/67
 https://bota.tistory.com/1710
 https://kocoafab.cc/tutorial/view/322
 ***
+
+#### 미니 출석시스템 - 홍승호
+
+
+#### 1. 개발 목적
+
+![](https://pimylifeup.com/wp-content/uploads/2019/02/Raspberry-Pi-RFID-Attendance-System-Thumbnail-Watermarky.jpg)
+
+라즈베리파이를 이용한 간편 출석 시스템을 구축하여 효율적인 데이터 처리 및 관리를 위함
+
+#### 2. 필요 장비 및 센서
+
+- RC522 RFID 리더기
+- 10k 옴 가변저항기
+- 16x2 LCD
+
+#### 3. 사용 기술
+
+- 아두이노 / python
+
+#### 4. 참조
+https://pimylifeup.com/raspberry-pi-rfid-attendance-system/
+
+***
