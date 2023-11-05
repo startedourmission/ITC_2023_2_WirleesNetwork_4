@@ -146,6 +146,8 @@ https://pimylifeup.com/raspberry-pi-rfid-attendance-system/
 
 #### 1. 개발 목적
 
+![](etc/image.png)
+
 가방에 센서를 장착하여 사용자의 이동 환경에 맞춰 대기질을 실시간으로 측정하고 Telegram으로 사용자에게 대기 환경 정보를 전달하고 마스크 권고와 같은 대안을 추천하며 GPS로 시간 및 장소를 수집해 일간, 주간, 월간 통계를 전달한다.
 출퇴근시 지하철 안 지하철 역사, 장거리 이동 혹은 대기 정보가 제공되지 않는곳에서 체류시 유용
 
@@ -159,9 +161,9 @@ https://pimylifeup.com/raspberry-pi-rfid-attendance-system/
 
 #### 3. 사용 기술
 
-기반 : 라즈베리파이, 아두이노
-센서 : 대기 측정 센서
-언어 : Python
+1. 기반 : 라즈베리파이, 아두이노
+2. 센서 : 대기 측정 센서
+3. 언어 : Python
 
 #### 4. 참조
 https://biz.chosun.com/it-science/ict/2023/02/04/34R26QSKFBG7BIAMQZFTMP5AKA/
