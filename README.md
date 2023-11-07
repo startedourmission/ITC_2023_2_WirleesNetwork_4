@@ -14,8 +14,7 @@
 ![](etc/sample1.png)
 
 
-![](etc/IMG_0239.PNG)
-
+![](etc/IMG_0239.jpg)
 
 #### 1. 개발목적
 
