@@ -1,12 +1,12 @@
 #include <Servo.h>
 
-String Sampledata = "<pm10Value>23</pm10Value><pm25Value>100</pm25Value>";
+String Sampledata[3] = {"<pm10Value>23</pm10Value><pm25Value>100</pm25Value>","<pm10Value>90</pm10Value><pm25Value>180</pm25Value>","<pm10Value>120</pm10Value><pm25Value>60</pm25Value>"};
  
 Servo servomotor;
 int a = 0;
 
 void setup() {
-  servomotor.attach(9);
+  servomotor.attach(9); // 9번 포트 설정
   Serial.begin(9600);                              
   // Serial 통신을 설정합니다.
   while(!Serial);                                           
@@ -14,8 +14,8 @@ void setup() {
 }
 
 void loop() {
-	  	
-      	  String payload =  Sampledata;
+  for(int i = 0; i < 3; i++){
+      	  String payload =  Sampledata[i];
           ////////////////////////////////////////////////////////////파싱
           int start_point = payload.indexOf("<pm10Value>");
           int end_point = payload.indexOf("</pm10Value>");
@@ -32,9 +32,9 @@ void loop() {
           
           if(pm_10 >= 0 && pm_10 <= 180){
             servomotor.write(pm_10);
-            delay(10000);
+            delay(5000);
             servomotor.write(pm_25);
-             delay(500000);
+             delay(3000);
           }
-  
+  }
 }
