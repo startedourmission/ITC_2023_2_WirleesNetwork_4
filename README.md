@@ -67,7 +67,7 @@
 
 #### 진행상황
 
-- [x] 웹 서버 구축 📅 2023-11-13 
+- [x] 웹 서버 구축 📅 2023-11-8 
 	- Python - Flask 사용
 - [ ] Human Detector 모델 테스트
 	후보
@@ -80,7 +80,9 @@
 
 - [x] 샘플 이미지 테스트
 
+MobileNet + SSD 사용
 ![](etc/sample2.png)
+bounding box [x, y, x, y], bounding box 중앙값, classification class, 정확도
 
 - [ ] 샘플 비디오 테스트
 - [ ] 라즈베리파이 테스트
