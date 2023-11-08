@@ -1,0 +1,36 @@
+#include <Servo.h> // Servo 라이브러리 사용
+Servo servo1;      // servo1 객체 생성
+
+int motorPin = 3;  // 3번 핀으로 DC 모터 제어
+int servoPin1 = 9; // 9번 핀으로 서보모터 제어
+
+unsigned long timeVal = 0; // 시간 추적
+
+int angle = 0;     // 서보모터 현재 각도 저장 변수
+int addAngle = 0;  // 서보모터의 각도 증가 또는 감소 변수
+
+void setup()
+{
+  pinMode(motorPin, OUTPUT);// DC모터 출력모드 설정
+  servo1.attach(servoPin1); // servo1 객체를 servoPin1 핀에 연결하여 서보 모터를 제어
+  servo1.write(angle);      // 서보 모터의 초기 각도를 angle 변수에 설정한 값으로 초기화
+  
+}
+
+void loop()
+{
+  digitalWrite(motorPin, HIGH); // DC모터 ON
+
+  if(millis()-timeVal >= 100) { // 서보 모터의 안정적인 제어를 위해 시간 차가 100ms 이상 일 때만 동작
+    angle = angle + addAngle;   // 현재 각도 업데이트
+    
+    if(angle == 180) {  // 각도가 180도면
+    	addAngle -= 10; // 10도씩 감소
+      
+    } else if(angle == 0){ // 각도가 0도면
+    	addAngle = 10; 	   // 10도씩 증가
+    }
+    servo1.write(angle);// 각도를 업데이트하여 서보모터 위치 변경
+    timeVal = millis(); // 현재시간을 저장하여 다음 시간 비교
+  } 
+}
