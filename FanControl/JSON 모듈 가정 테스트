@@ -1,0 +1,123 @@
+#include <ArduinoJson.h>
+
+void setup() {
+  // Initialize serial port
+  Serial.begin(9600);
+  while (!Serial) continue;
+
+  StaticJsonDocument<1000> doc;  // Increase the capacity to accommodate the JSON data
+
+  char json[] =
+      "{"
+      "\"response\":{"
+      "\"body\":{"
+      "\"totalCount\":23,"
+      "\"items\":["
+      "{"
+      "\"so2Grade\":\"1\","
+      "\"coFlag\":null,"
+      "\"khaiValue\":\"90\","
+      "\"so2Value\":\"0.004\","
+      "\"coValue\":\"1.1\","
+      "\"pm25Flag\":\"통신장애\","
+      "\"pm10Flag\":null,"
+      "\"pm10Value\":\"35\","
+      "\"o3Grade\":\"1\","
+      "\"khaiGrade\":\"2\","
+      "\"pm25Value\":\"-\","
+      "\"no2Flag\":null,"
+      "\"no2Grade\":\"2\","
+      "\"o3Flag\":null,"
+      "\"pm25Grade\":\"1\","
+      "\"so2Flag\":null,"
+      "\"dataTime\":\"2023-11-08 19:00\","
+      "\"coGrade\":\"1\","
+      "\"no2Value\":\"0.054\","
+      "\"pm10Grade\":\"1\","
+      "\"o3Value\":\"0.003\""
+      "},"
+      "{"
+      "\"so2Grade\":\"1\","
+      "\"coFlag\":null,"
+      "\"khaiValue\":\"77\","
+      "\"so2Value\":\"0.003\","
+      "\"coValue\":\"0.8\","
+      "\"pm25Flag\":null,"
+      "\"pm10Flag\":null,"
+      "\"pm10Value\":\"28\","
+      "\"o3Grade\":\"1\","
+      "\"khaiGrade\":\"2\","
+      "\"pm25Value\":\"15\","
+      "\"no2Flag\":null,"
+      "\"no2Grade\":\"2\","
+      "\"o3Flag\":null,"
+      "\"pm25Grade\":\"1\","
+      "\"so2Flag\":null,"
+      "\"dataTime\":\"2023-11-08 18:00\","
+      "\"coGrade\":\"1\","
+      "\"no2Value\":\"0.046\","
+      "\"pm10Grade\":\"1\","
+      "\"o3Value\":\"0.006\""
+      "},"
+      "{"
+      "\"so2Grade\":\"1\","
+      "\"coFlag\":null,"
+      "\"khaiValue\":\"57\","
+      "\"so2Value\":\"0.003\","
+      "\"coValue\":\"0.5\","
+      "\"pm25Flag\":null,"
+      "\"pm10Flag\":null,"
+      "\"pm10Value\":\"24\","
+      "\"o3Grade\":\"1\","
+      "\"khaiGrade\":\"2\","
+      "\"pm25Value\":\"12\","
+      "\"no2Flag\":null,"
+      "\"no2Grade\":\"2\","
+      "\"o3Flag\":null,"
+      "\"pm25Grade\":\"1\","
+      "\"so2Flag\":null,"
+      "\"dataTime\":\"2023-11-08 17:00\","
+      "\"coGrade\":\"1\","
+      "\"no2Value\":\"0.034\","
+      "\"pm10Grade\":\"1\","
+      "\"o3Value\":\"0.017\""
+      "}"
+      "],"
+      "\"pageNo\":1,"
+      "\"numOfRows\":3"
+      "},"
+      "\"header\":{"
+      "\"resultMsg\":\"NORMAL_CODE\","
+      "\"resultCode\":\"00\""
+      "}"
+      "}"
+      "}";
+
+  auto error = deserializeJson(doc, json);
+  if (error) {
+    Serial.print(F("deserializeJson() failed with code "));
+    Serial.println(error.c_str());
+    return;
+  }
+
+  // Extract data from the JSON
+  JsonObject response = doc["response"];
+  JsonObject body = response["body"];
+  JsonArray items = body["items"];
+  
+  for (JsonVariant item : items) {
+    const char* pm25Value = item["pm25Value"];
+    const char* pm10Value = item["pm10Value"];
+    
+    if (strcmp(pm25Value, "-") != 0) {
+      Serial.println("PM2.5 Value: " + String(pm25Value));
+    }
+    if (pm10Value) {
+      Serial.println("PM10 Value: " + String(pm10Value));
+    }
+  }
+}
+
+void loop() {
+  // Not used in this example.
+}
