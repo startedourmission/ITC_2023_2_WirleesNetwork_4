@@ -26,9 +26,9 @@ def threaded(client_socket, addr):
 def main():
     global HOST, PORT
 
-#소켓 초기화
+# 소켓 초기화
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#소켓 에러처리  
+# 소켓 에러처리  
   server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server_socket.bind((HOST, PORT))
     server_socket.listen()
