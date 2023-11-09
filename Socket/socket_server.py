@@ -4,8 +4,8 @@ from operator import eq
 import os
 import socket
 
-HOST = '' // 라즈베리파이서버IP
-PORT = // 접속할 PORT
+HOST = '라즈베리파이서버IP'
+PORT = 접속할 PORT
 
 def threaded(client_socket, addr): 
 
