@@ -13,10 +13,7 @@
         echo "<br>";
     }
 
-    echo "다음 IP '$address' 와 Port '$port' 으로 접속중...";
-    echo "<br>";
-
-    // 소켓 연결 및 $result에 접속값 지정
+    # 소켓 연결 및 $result에 접속값 지정
     $result = socket_connect($socket, $address, $port);
 
     if ($result === false) {
