@@ -1,4 +1,4 @@
-#PHP 설치방법
+# PHP 설치방법
 
 php 5
 sudo apt-get install php5
@@ -13,7 +13,7 @@ sudo echo "debhttps://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt
 sudo apt-get update
 sudo apt-get install –y php7.2
 
-#실행방법 
+# 실행방법 
 
 1) comand 창에 /var/www/html/파일명
 2) 인터넷 창에 http://localhost/파일명 또는 http://IP/파일명
