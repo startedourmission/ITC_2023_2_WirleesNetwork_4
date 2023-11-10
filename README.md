@@ -88,8 +88,30 @@
 - [x] 샘플 이미지 테스트
 
 MobileNet + SSD 사용
-![](etc/sample2.png)
-bounding box [x, y, x, y], bounding box 중앙값, classification class, 정확도
+
+cURL POST Test
+```sh
+surl -x POST -F “file=@PATH” 웹서버주소/upload
+```
+
+```json
+[
+	{
+		“box”:[  //전체 bounding box 좌표
+		x1,
+		y1,
+		x2,
+		y2
+		],
+		“center”:[ //bounding box 중앙 좌표
+		x,
+		y
+		],
+		“class” : “person”,  //classification class
+		“confidence”: 0~1    // 정확도
+	}
+]
+```
 
 - [ ] 샘플 비디오 테스트
 - [ ] 라즈베리파이 테스트
