@@ -3,17 +3,23 @@
 String Sampledata[3] = {"<pm10Value>23</pm10Value><pm25Value>100</pm25Value>","<pm10Value>90</pm10Value><pm25Value>180</pm25Value>","<pm10Value>120</pm10Value><pm25Value>60</pm25Value>"};
  
 Servo servomotor;
-int a = 0;
+int dcspeed = 128;
+int dc = 11; // dc 모터 11번 포트
 
 void setup() {
-  servomotor.attach(9); // 9번 포트 설정
   Serial.begin(9600);                              
+  servomotor.attach(9); // 9번 포트 설정
+  pinMode(dc, OUTPUT);
   // Serial 통신을 설정합니다.
   while(!Serial);                                           
   Serial.println("Servor Mortor");
 }
 
 void loop() {
+  int dcdata = 100; // DC 속도 제어값
+  if( dcdata != dcspeed ) {
+	analogWrite(dc, dcdata);
+  }
   for(int i = 0; i < 3; i++){
       	  String payload =  Sampledata[i];
           ////////////////////////////////////////////////////////////파싱
@@ -22,7 +28,7 @@ void loop() {
           String pm10=payload.substring(start_point+11,end_point); //더하기11은 <pm10Value>글자수
           Serial.println("PM 10 : " + pm10);
           /////////////////////////////////////////////////////////////
-		  int start_point2 = payload.indexOf("<pm25Value>");
+	  int start_point2 = payload.indexOf("<pm25Value>");
           int end_point2 = payload.indexOf("</pm25Value>");
           String pm25=payload.substring(start_point2+11,end_point2); //더하기11은 <pm10Value>글자수
           Serial.println("PM 25 : " + pm25);		 
