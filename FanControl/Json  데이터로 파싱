@@ -3,8 +3,8 @@
 
 StaticJsonDocument<200> doc;
 String Sampledata = "{'data1':'20','data2':'120'}";
- 
-  
+int dc = 11; // dc 모터 11번 포트
+int dcdata = 100; // DC 속도 데이터 값   
 Servo servomotor;
 int a =  0;
 
@@ -19,11 +19,16 @@ void setup() {
 }
 
 void loop() {
-	  	 deserializeJson(doc, Sampledata);
+  	if( dcdata != dcspeed ) {
+	analogWrite(dc, dcdata);
+  }
+
+
+	deserializeJson(doc, Sampledata);
   
-  		 String data1  = doc["data1"].toInt();
-  		 String data2  = doc["data2"].toInt();	
-         Serial.println(data1);
+    	String data1  = doc["data1"].toInt();
+  	String data2  = doc["data2"].toInt();	
+        Serial.println(data1);
   		 Serial.println(data2);
   	     servomotor.write(data1);
   	     delay(10000);
