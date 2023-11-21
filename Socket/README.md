@@ -16,3 +16,21 @@ sudo apt-get install –y php7.2
 # 실행방법 
 1) comand 창에 /var/www/html/파일명
 2) 인터넷 창에 http://localhost/파일명 또는 http://IP/파일명
+
+
+## http 통신
+
+```python
+import requests
+
+def httpcliet():
+	url = ''
+	files = {'file': open('', 'rb')}
+	
+	response = requests.post(url, files=files) # SSL 인증을 위해 필요한 경우
+	print(response.text)
+
+httpcliet()
+
+
+```
