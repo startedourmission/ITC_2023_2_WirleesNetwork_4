@@ -1,29 +1,33 @@
-import base64
-import time
 import websocket
-from picamera import PiCamera
-from io import BytesIO
+import _thread
+import time
+import base64
 
-def send_frame(ws, frame):
-    # 영상 프레임을 base64 인코딩 문자열로 변환
-    encoded_string = base64.b64encode(frame.getvalue()).decode('utf-8')
-    # 웹소켓을 통해 인코딩된 문자열 전송
+def send_image(ws):
+    file_path = 'path/to/your/image.jpg'  # 이미지 파일 경로
+    with open(file_path, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
+    
     ws.send(encoded_string)
 
-# 웹소켓 연결 초기화
-ws = websocket.WebSocket()
-ws.connect("ws://your_server_ip:5000")
+def on_message(ws, message):
+    print("Received message from server: " + message)
 
-camera = PiCamera()
+def on_error(ws, error):
+    print("Error: " + str(error))
 
-# 카메라 설정
-camera.resolution = (640, 480)
-camera.framerate = 24
+def on_close(ws):
+    print("### Connection closed ###")
 
-# 영상 스트림을 시작
-with BytesIO() as frame:
-    for _ in camera.capture_continuous(frame, 'jpeg', use_video_port=True):
-        frame.seek(0)
-        send_frame(ws, frame)
-        frame.truncate()
-        time.sleep(0.04)  # 대략 24 fps에 해당하는 지연
+def on_open(ws):
+    _thread.start_new_thread(send_image, (ws,))
+
+if __name__ == "__main__":
+    websocket.enableTrace(True)
+    ws = websocket.WebSocketApp("ws://yourserver.com:port",
+                              on_message=on_message,
+                              on_error=on_error,
+                              on_close=on_close)
+
+    ws.on_open = on_open
+    ws.run_forever()
