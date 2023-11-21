@@ -13,6 +13,8 @@
 	
 	라즈베리 파이에서 수신한 데이터를 이용하여
 	선풍기 각도, 모터 속도 제어
+	
+![image](https://github.com/startedourmission/ITC_2023_2_WirleesNetwork_4/assets/37292847/ccac1172-1cf7-49ef-92f3-643bcd9d0c7c)
 
 - 차진우 : 웹 소켓 통신 기능 추가
 	
