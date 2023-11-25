@@ -1,5 +1,3 @@
-https://www.tinkercad.com/things/cLtq50HgiKW-xml-/editel
-
 1. 스텝 모터 제어(Serial)
   모터를 8, 9, 10, 11 포트에 연결하고
   시리얼에 값이 들어오면 엔터전까지 한줄의 데이터를 읽음 (입력형신은 Scontrol : 0~360)의 정수
