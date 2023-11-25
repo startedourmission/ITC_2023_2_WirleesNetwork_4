@@ -1,0 +1,45 @@
+#include <Stepper.h>
+
+// 2048:한바퀴(360도), 1024:반바퀴(180도)
+const int stepsPerRevolution = 200;  
+ // 모터를 연결한 핀 설정 8, 9 ,10 ,11
+Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11); 
+
+int currentPosition = 0;  // 현재 모터의 위치
+
+void setup() {
+  Serial.begin(9600);  // 시리얼 통신 시작
+}
+
+void loop() {
+  if (Serial.available() > 0) { // serial 모니터에 값이 들어오면 동작
+    String input = Serial.readStringUntil('\n');  // 엔터 전까지 모든 값을 읽음
+    if (input.startsWith("SControl")) {		//SControl : 조정할 각도로 값을 받는다 가정
+      int targetAngle = input.substring(9).toInt();  // "SControl : " 이후의 부분을 정수로 변환
+      moveMotor(targetAngle); // 모터 동작 함수
+    }
+  }
+}
+
+// 모터 동작 함수
+void moveMotor(int targetAngle) {
+  // map(value, fromLow, fromHigh, toLow, toHigh);
+  // tarfetAngle에 0 ~ 360 부터의 값이 들오면 stepsPerRevolution 각도의 비율도 동작함
+  // 만약 타켓 엥글이 180이면  stepsRevoltio 100이 들어감 
+  int targetPosition = map(targetAngle, 0, 360, 0, stepsPerRevolution);  // 목표 각도를 모터 스텝으로 변환
+  int stepsToMove = shortestPath(currentPosition, targetPosition);  // 현재 위치에서 목표 위치까지의 최단 경로 스텝 계산
+  myStepper.setSpeed(100);  // 모터 속도 설정
+  myStepper.step(stepsToMove);    // 모터 동작
+  currentPosition = targetPosition;  // 현재 위치 업데이트
+}
+
+// 최단거리 함수
+int shortestPath(int current, int target) {
+  // countercolck 반시계 , clock 시계 반향
+  int clockwise = (target - current + stepsPerRevolution) % stepsPerRevolution;
+  // ( 목표 위치 - 현재위치 + 200) % 200;
+  int counterclockwise = (current - target + stepsPerRevolution) % stepsPerRevolution;
+  // ( 현재위치 - 목표위치 + 200) % 200;
+  // 비교해서 이동 스텝이 적은 쪽의 값을 돌려줌
+  return (clockwise < counterclockwise) ? clockwise : -counterclockwise;
+}
