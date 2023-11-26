@@ -1,0 +1,45 @@
+#include <Stepper.h>
+
+// 스텝 모터 관련 설정
+const int stepsPerRevolution = 2048; // 스텝 모터의 한 회전당 스텝 수
+Stepper myStepper(stepsPerRevolution, 11, 9, 10, 8); // 스텝 모터 객체 생성
+
+// DC 모터 핀 설정
+int in1 = 3; // DC 모터의 핀1
+int in2 = 4; // DC 모터의 핀2
+int en1 = 5; // DC 모터의 enable 핀
+
+void setup() {
+  myStepper.setSpeed(20); // 스텝 모터의 속도 설정 (20 스텝/초)
+  
+  // DC 모터를 제어하기 위한 핀 설정
+  pinMode(in1, OUTPUT); // DC 모터 핀1을 출력 모드로 설정
+  pinMode(in2, OUTPUT); // DC 모터 핀2를 출력 모드로 설정
+  pinMode(en1, OUTPUT); // DC 모터 enable 핀을 출력 모드로 설정
+}
+
+void loop() {
+  // DC 모터를 시계 방향으로 회전
+  digitalWrite(in1, HIGH); // DC 모터의 핀1을 HIGH로 설정
+  digitalWrite(in2, LOW);  // DC 모터의 핀2를 LOW로 설정
+
+  // 시계 방향으로 180도 회전
+  for (int i = 0; i < stepsPerRevolution / 4; i++) {
+    myStepper.step(1); // 스텝 모터를 1 스텝만큼 시계 방향으로 회전
+    delay(5);           // 회전 속도 제어를 위한 딜레이 (필요에 따라 조절)
+  }
+
+  delay(500); // 0.5초 대기
+
+  // DC 모터를 반시계 방향으로 회전
+  digitalWrite(in1, LOW);  // DC 모터의 핀1을 LOW로 설정
+  digitalWrite(in2, HIGH); // DC 모터의 핀2를 HIGH로 설정
+
+  // 반시계 방향으로 180도 회전
+  for (int i = 0; i < stepsPerRevolution / 4; i++) {
+    myStepper.step(-1); // 스텝 모터를 1 스텝만큼 반시계 방향으로 회전
+    delay(5);            // 회전 속도 제어를 위한 딜레이 (필요에 따라 조절)
+  }
+
+  delay(500); // 0.5초 대기
+}
