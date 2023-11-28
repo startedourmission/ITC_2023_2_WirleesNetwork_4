@@ -1,36 +1,29 @@
 #include <Stepper.h>
 
-// 2048:한바퀴(360도), 1024:반바퀴(180도)
-const int stepsPerRevolution = 200;  
- // 모터를 연결한 핀 설정 8, 9 ,10 ,11
-Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11); 
-
-int currentPosition = 0;  // 현재 모터의 위치
+// 2048:한바퀴(360도), 1024:반바퀴(180도)...
+const int stepsPerRevolution = 2048; 
+// 모터 드라이브에 연결된 핀 IN4, IN2, IN3, IN1
+Stepper myStepper(stepsPerRevolution,11,9,10,8); 
+int currentPosition = 0; 
 
 void setup() {
-  Serial.begin(9600);  // 시리얼 통신 시작
+  myStepper.setSpeed(14); 
+  Serial.begin(9600);
 }
 
 void loop() {
-  if (Serial.available() > 0) { // serial 모니터에 값이 들어오면 동작
-    String input = Serial.readStringUntil('\n');  // 엔터 전까지 모든 값을 읽음
-    if (input.startsWith("SControl")) {		//SControl : 조정할 각도로 값을 받는다 가정
-      int targetAngle = input.substring(9).toInt();  // "SControl : " 이후의 부분을 정수로 변환
-      moveMotor(targetAngle); // 모터 동작 함수
+  // 시계 반대 방향으로 한바퀴 회전
+   if (Serial.available() > 0) { // serial 모니터에 값이 들어오면 동작
+    String input = Serial.readStringUntil('\n'); 
+    if (input.startsWith("Scontrol:")) {
+    int targetAngle = input.substring(9).toInt();
+    int targetPosition = map(targetAngle, 0, 360, 0, stepsPerRevolution);
+    int steps = shortestPath(currentPosition, targetPosition);
+    myStepper.step(steps);
+    Serial.println(currentPosition);
+    currentPosition = targetPosition;
     }
   }
-}
-
-// 모터 동작 함수
-void moveMotor(int targetAngle) {
-  // map(value, fromLow, fromHigh, toLow, toHigh);
-  // tarfetAngle에 0 ~ 360 부터의 값이 들오면 stepsPerRevolution 각도의 비율도 동작함
-  // 만약 타켓 엥글이 180이면  stepsRevoltio 100이 들어감 
-  int targetPosition = map(targetAngle, 0, 360, 0, stepsPerRevolution);  // 목표 각도를 모터 스텝으로 변환
-  int stepsToMove = shortestPath(currentPosition, targetPosition);  // 현재 위치에서 목표 위치까지의 최단 경로 스텝 계산
-  myStepper.setSpeed(100);  // 모터 속도 설정
-  myStepper.step(stepsToMove);    // 모터 동작
-  currentPosition = targetPosition;  // 현재 위치 업데이트
 }
 
 // 최단거리 함수
