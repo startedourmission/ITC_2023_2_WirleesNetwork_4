@@ -51,7 +51,7 @@ try:
 finally:
     camera.close()
 ```
-# 사람인식-> 사람이 감지될 때만 사진
+## 사람인식-> 사람이 감지될 때만 사진(OpenCV - Haar Cascade)
 
 https://blog.naver.com/ljy9378/221438230814
 ```
