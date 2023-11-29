@@ -5,7 +5,7 @@ import json
 import serial
 
 try:
-    ser = serial.Serial('/dev/ttyUSB0', 9600)
+    ser = serial.Serial('/dev/ttyUSB0', 9600) //포트 연결 확인
     ser.open()
 except:
     pass
@@ -26,7 +26,7 @@ while True:
         for i in obj:
             print('y:', i['center'][1])
             test1 = int(i['center'][1])          
-            str1 =  ("Scontrol:" + str(test1))
+            str1 =  ("Scontrol:" + str(test1)) //아두이노에 문자열로 합쳐서 바이트 단위로 변환해주기
             ser.write(bytes(str1.encode()))
 
             print()
