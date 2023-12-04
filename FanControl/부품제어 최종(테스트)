@@ -1,0 +1,68 @@
+#include <Stepper.h>
+
+// 2048:한바퀴(360도), 1024:반바퀴(180도)...
+const int stepsPerRevolution = 2048; 
+// 모터 드라이브에 연결된 핀 IN4, IN2, IN3, IN1
+Stepper myStepper(stepsPerRevolution,11,9,10,8); 
+int currentPosition = 0; 
+int in1 = 4;
+int in2 = 5;
+int en1 = 6;
+int sleeptime =  10;
+void setup() {
+  myStepper.setSpeed(14); 
+  Serial.begin(9600);
+  PinMode (in1, OUTPUT);
+  PinMode (in2, OUTPUT);
+  PinMode (en1, 255);
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+
+}
+
+
+
+void loop() {
+  // 시계 반대 방향으로 한바퀴 회전
+   if (Serial.available() > 0) { // serial 모니터에 값이 들어오면 동작
+    String input = Serial.readStringUntil('\n'); 
+    turnon();
+    if (input.startsWith("Scontrol:")) {
+    int targetAngle = input.substring(9).toInt();
+    int targetPosition = map(targetAngle, 0, 360, 0, stepsPerRevolution);
+    int steps = shortestPath(currentPosition, targetPosition);
+    myStepper.step(steps);
+    Serial.println(currentPosition);
+    currentPosition = targetPosition;
+    }
+  } else {
+    sleeptime--;
+    delay(1000);
+    if(sleeptime < 0) {
+      turnoff();
+    }
+  }
+}
+
+void turnoff(){
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+}
+
+void turnon(){
+   digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+
+}
+
+
+// 최단거리 함수
+int shortestPath(int current, int target) {
+  // countercolck 반시계 , clock 시계 반향
+  int clockwise = (target - current + stepsPerRevolution) % stepsPerRevolution;
+  // ( 목표 위치 - 현재위치 + 200) % 200;
+  int counterclockwise = (current - target + stepsPerRevolution) % stepsPerRevolution;
+  // ( 현재위치 - 목표위치 + 200) % 200;
+  // 비교해서 이동 스텝이 적은 쪽의 값을 돌려줌
+  return (clockwise < counterclockwise) ? clockwise : -counterclockwise;
+}
