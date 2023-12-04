@@ -8,7 +8,8 @@ int currentPosition = 0;
 int in1 = 4;
 int in2 = 5;
 int en1 = 6;
-int sleeptime =  10;
+int sleeptime =  15;
+bool status = true;
 void setup() {
   myStepper.setSpeed(14); 
   Serial.begin(9600);
@@ -26,7 +27,10 @@ void loop() {
   // 시계 반대 방향으로 한바퀴 회전
    if (Serial.available() > 0) { // serial 모니터에 값이 들어오면 동작
     String input = Serial.readStringUntil('\n'); 
-    turnon();
+    if(status == false){
+      sleeptime = 15;
+      turnon();
+    }
     if (input.startsWith("Scontrol:")) {
     int targetAngle = input.substring(9).toInt();
     int targetPosition = map(targetAngle, 0, 360, 0, stepsPerRevolution);
@@ -40,6 +44,7 @@ void loop() {
     delay(1000);
     if(sleeptime < 0) {
       turnoff();
+      status = false;
     }
   }
 }
