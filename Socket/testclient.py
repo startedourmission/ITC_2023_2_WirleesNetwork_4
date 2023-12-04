@@ -6,7 +6,6 @@ import serial
 
 try:
     ser = serial.Serial('/dev/ttyUSB0', 9600)
-    ser.open()
 except:
     pass
 
