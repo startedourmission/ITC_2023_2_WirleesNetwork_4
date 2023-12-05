@@ -20,14 +20,13 @@
 1. 아두이노, 라즈베리파이
 2. pi카메라
 3. 선풍기 회전 및 바퀴에 사용될 모터
-4. 모터드라이버
+4. 모터드라이브
 5. 선풍기 날개
 
 #### 3. 사용 기술
 
 - 선풍기 조작 : 아두이노 / Python
-- 라즈베리파이 -> 서버 영상 전송 : 스트리밍 (g streamer, ffmpeg 등) 고려 중
-- 서버 -> 라즈베리파이 데이터 전송 : 웹 소켓 고려 중
+- 라즈베리파이 - 서버 실시간 이미지 전송 : HTTP 통신
 - 딥러닝 영상 처리 -> Pre-trained Object Detection 모델 (SSD + MobileNet)
 
 # 과정
@@ -130,8 +129,6 @@
 
 - [x] 샘플 이미지 테스트
 
-MobileNet + SSD 사용
-
 cURL POST Test
 ```sh
 surl -x POST -F “file=@PATH” 웹서버주소/upload
@@ -166,3 +163,4 @@ surl -x POST -F “file=@PATH” 웹서버주소/upload
 
 - [x] 테스트 데이터로 기본 프로그램 작성
 - [x] 데이터 수신 확인
+- [x] 모터 각도 조정
